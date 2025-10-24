@@ -112,7 +112,7 @@ git clone marcus-ha/Labb2
 ```
 #### 2. Navigate to the Project Directory
 ```bash
-cd marcus-ha/Labb2
+cd Labb2
 ```
 
 #### 3. Install Dependencies (NodeJS)
