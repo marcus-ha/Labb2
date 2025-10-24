@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity, Alert } from 'react-native'; // <-- Alert importerat
-import { loadSessions, clearAllSessions, deleteSession } from '../utils/storage'; // <-- deleteSession importerat
+import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity, Alert } from 'react-native';
+import { loadSessions, clearAllSessions, deleteSession } from '../utils/storage';
 import GlobalStyles from '../styles/GlobalStyles';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-// Lokal stil för SessionLogScreen
+// Ska flyttas till GLobalStyles.js senare
 const localStyles = StyleSheet.create({
     logEntry: {
         padding: 15,
@@ -113,7 +113,7 @@ export default function SessionLogScreen() {
         );
     };
 
-    // NY FUNKTION: Hanterar radering av en enstaka session
+    // Hanterar radering av en enstaka session
     const handleDeleteSession = (index, sessionName) => {
         Alert.alert(
             "Radera session",
@@ -136,7 +136,7 @@ export default function SessionLogScreen() {
     };
 
     // Komponent för att rendera varje sessionspost
-    const renderItem = ({ item, index }) => { // <-- Index är nu tillgängligt här!
+    const renderItem = ({ item, index }) => {
         const isCompleted = item.isCompleted === true;
 
         const statusIcon = isCompleted ? 'checkmark-done-circle' : 'checkmark-done-circle';
@@ -183,7 +183,7 @@ export default function SessionLogScreen() {
                 <>
                     <FlatList
                         data={sessions}
-                        // NYCKELN: Skickar index till renderItem
+                        // Key som skickar index till renderItem
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                         contentContainerStyle={{ paddingBottom: 20 }}

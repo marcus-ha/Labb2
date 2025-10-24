@@ -73,7 +73,7 @@ export default function TimerScreen({ route, navigation }) {
 
     const intermSoundObject = useRef(new Audio.Sound());
     const finalSoundObject = useRef(new Audio.Sound());
-    const backgroundMusicObject = useRef(new Audio.Sound()); // <--- NY useRef
+    const backgroundMusicObject = useRef(new Audio.Sound());
 
     // Funktion för att välja ett slumpmässigt tips
     const setRandomTip = useCallback(() => {
@@ -87,13 +87,9 @@ export default function TimerScreen({ route, navigation }) {
             try {
                 await intermSoundObject.current.loadAsync(require('../assets/sounds/bell.mp3'));
                 await finalSoundObject.current.loadAsync(require('../assets/sounds/final_chime.mp3'));
-                // *** NY PLATS FÖR MUSIKSTART ***
+
                 if (route.params?.selectedMusic) {
-                    // Vi anropar den direkta logiken här, men det är enklare att använda din befintliga useCallback.
-                    // För att använda useCallback med [] måste vi ta bort alla beroenden.
-                    // Vi behåller din struktur, men tömmer listan.
-                    // För att detta ska funka måste vi lita på att useCallback är stabil eller använda en referens.
-                    // Det enklaste är:
+
                     loadAndPlayMusic(route.params.selectedMusic);
                 }
             } catch (error) {
@@ -110,9 +106,9 @@ export default function TimerScreen({ route, navigation }) {
         return () => {
             intermSoundObject.current.unloadAsync();
             finalSoundObject.current.unloadAsync();
-            stopMusic(); // <-- Stoppar och avlastar bakgrundsmusiken när skärmen lämnas
+            stopMusic();
         };
-    }, []); // <--- TÖMD LISTA: Detta gör att koden körs EN GÅNG vid montering.
+    }, []); // <--- Tömmer listan: Detta gör att koden körs EN GÅNG vid montering.
 
     // Ljudfunktioner med useCallback
     const playIntermSound = useCallback(async () => {
@@ -171,16 +167,12 @@ export default function TimerScreen({ route, navigation }) {
 
             // Kolla om ljudet är laddat, spelar, eller håller på att laddas (isLoaded är säkrast)
             if (status.isLoaded || status.isLoaded === false) {
-                // Om den är laddad, eller har försökt ladda (status finns), kan vi avlasta.
-                // Om isPlaying är true, stoppar vi först.
                 if (status.isPlaying) {
                     await backgroundMusicObject.current.stopAsync();
                 }
                 await backgroundMusicObject.current.unloadAsync();
             }
-            // Om den var i ett "loading"-tillstånd, och vi inte kunde avlasta, låt den vara. 
-            // Nästa loadAsync kommer då att hantera unload först, vilket är mindre idealiskt 
-            // men undviker att krascha här.
+
 
         } catch (error) {
             // Fånga felet om den klagar på att den redan laddar/avlastar
@@ -208,7 +200,7 @@ export default function TimerScreen({ route, navigation }) {
         }
 
         playFinalSound();
-        stopMusic(); // <-- MÅSTE KÖRAS INNAN NAVIGATION.
+        stopMusic();
 
         let programName = 'Pomodoro';
         if (isCustomProgram60) {
@@ -263,7 +255,7 @@ export default function TimerScreen({ route, navigation }) {
                             setTime(programSteps[nextStepIndex].time);
                             setIsRunning(true);
 
-                            // *** LÄGG TILL HÄR FÖR ANPASSADE PROGRAM ***
+
                             if (programSteps[nextStepIndex].name.toLowerCase().includes('paus') || programSteps[nextStepIndex].name.toLowerCase().includes('andetag')) {
                                 setRandomTip();
                             }
@@ -327,7 +319,7 @@ export default function TimerScreen({ route, navigation }) {
             // Rotera tipset var 10:e sekund (10000 millisekunder)
             tipInterval = setInterval(() => {
                 setRandomTip();
-            }, 5000);
+            }, 10000);
         }
 
         // Rensar intervallet när fasen byts, timern pausas/stoppas, eller komponenten demonteras
@@ -403,12 +395,6 @@ export default function TimerScreen({ route, navigation }) {
             ) : (
                 <>
                     <Text style={GlobalStyles.titleText}>{phaseTitle}</Text>
-
-                    {/* NY LOGIK: Kontrollera om phaseTitle innehåller "Paus" 
-                      ELLER om det är ett anpassat programsteg som är en paus.
-                      Vi använder .toLowerCase().includes('paus') för att fånga alla pauslägen. 
-                      Vi lägger också till 'Djupa andetag' som en paus-situation för tips.
-                    */}
 
 
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

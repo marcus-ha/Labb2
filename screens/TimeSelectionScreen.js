@@ -15,7 +15,7 @@ export default function TimeSelectionScreen({ navigation }) {
         navigation.navigate('MusicSelection', { program: 'customProgram120' });
     };
 
-    // Funktion för att starta timern med egen inmatning
+    // Starta timern med egen inmatning, WORK IN PROGRESS
     const handleStartCustomTimer = () => {
         const minutes = parseInt(timeInput);
 
@@ -70,7 +70,7 @@ export default function TimeSelectionScreen({ navigation }) {
         </View>
     );
 }
-
+// Ska flyttas till GlobalStyles.js senare
 const styles = StyleSheet.create({
     optionContainer: {
         alignItems: 'center',

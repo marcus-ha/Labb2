@@ -12,7 +12,7 @@ export default function MusicSelectionScreen({ route, navigation }) {
     ];
 
     const handleMusicSelect = (selectedMusicKey) => {
-        navigation.navigate('Förberedelse', { // <-- ÄNDRAD TILL FÖRBEREDELSE
+        navigation.navigate('Förberedelse', {
             program: program,
             initialTime: initialTime,
             selectedMusic: selectedMusicKey
@@ -20,7 +20,7 @@ export default function MusicSelectionScreen({ route, navigation }) {
     };
 
     const handleNoMusic = () => {
-        navigation.navigate('Förberedelse', { // <-- ÄNDRAD TILL FÖRBEREDELSE
+        navigation.navigate('Förberedelse', {
             program: program,
             initialTime: initialTime,
             selectedMusic: null
@@ -54,7 +54,7 @@ export default function MusicSelectionScreen({ route, navigation }) {
         </View>
     );
 }
-
+// Ska flyttas till GlobalStyles.js senare
 const styles = StyleSheet.create({
     infoText: {
         fontSize: 18,

@@ -3,15 +3,15 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import GlobalStyles from '../styles/GlobalStyles';
 
 export default function PreparationScreen({ route, navigation }) {
-    // 1. Fånga upp ALLA nödvändiga parametrar
+    // Fånga upp ALLA nödvändiga parametrar
     const { program, initialTime, selectedMusic } = route.params;
 
     const handleStartSession = () => {
-        // 2. Skicka ALLA parametrar vidare till TimerScreen
+        // Skicka ALLA parametrar vidare till TimerScreen
         navigation.navigate('Timer', {
             program: program,
-            initialTime: initialTime, // Viktig för Pomodoro-läget
-            selectedMusic: selectedMusic // Denna fixar musikproblemet!
+            initialTime: initialTime,
+            selectedMusic: selectedMusic
         });
     };
 
@@ -34,7 +34,7 @@ export default function PreparationScreen({ route, navigation }) {
     );
 }
 
-
+// Ska flyttas till GLobalStyles.js senare
 const styles = StyleSheet.create({
     titleText: {
         fontSize: 28,

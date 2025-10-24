@@ -32,7 +32,7 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
 
-    // Timer-specifika stilar
+
     timerText: {
         fontSize: 60,
         fontWeight: 'bold',
@@ -74,11 +74,11 @@ export default StyleSheet.create({
         height: '100%',
         backgroundColor: '#841584',
     },
-    // NYA STILAR FÖR TIPS
+
     tipContainer: {
 
         position: 'absolute',
-        bottom: 40, // <-- Låser tipset 50 pixlar från botten av skärmen
+        bottom: 40,
         borderWidth: 1,
         borderColor: '#72727207',
         backgroundColor: '#f0f0f0ff',
